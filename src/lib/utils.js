@@ -1,0 +1,53 @@
+import { shuffle, sample, sampleSize } from 'lodash/collection'
+
+export const createQuestionsList = (qlist) => {
+    let output = []
+    for (let i = 0; i < qlist.length; i++) {
+        // console.log(qlist[i]);
+        output.push(qlist[i].question)
+    }
+    return output
+};
+
+export const sleep = (duration) => new Promise((resolve) => {
+    setTimeout(() => {
+      resolve();
+    }, duration)
+})
+  
+export const createSelection = (breedList, choiceCount) => {
+    // console.log("hey")
+    // console.log(breedList)
+    const currentAnswers = shuffle(sampleSize(breedList, choiceCount))
+    return { 
+        currentAnswers, 
+    }
+}
+
+export const createAnswerChoicesSelection = (breedList, choiceCount) => {
+    const currentAnswers = shuffle(sampleSize(breedList, choiceCount))
+    // console.log(currentAnswers)
+    return {
+        currentAnswers,
+    }
+}
+
+export const createNextQuestion = (currentAnswers) => {
+    return { 
+        currentAnswers: shuffle(currentAnswers),
+        correctAnswer: sample(currentAnswers)
+    }
+}
+
+export const createNextQuestionFR = (questions_to_ask) => {
+    let subset = sampleSize(questions_to_ask, 4)
+    let answers = subset.map((a) => a.answer);
+    let cur = sample(subset);
+
+    return {
+      currentAnswers: answers,
+      correctAnswer: cur.answer,
+      arabicQuestion: cur.question,
+      englishTlit: cur.tlit
+    };
+};

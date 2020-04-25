@@ -1,0 +1,40 @@
+.button {
+    background: #242424;
+    border:#242424;
+    box-sizing: border-box;
+    font-size: 18px;
+    margin: 1.5vh 1.5vw;
+    padding: 15px;
+    transition: 0.3s;
+    min-width: 300px;
+    font-family: 'Lato', sans-serif;
+}
+
+.feedback {
+    font-family: 'Lato', sans-serif;
+}
+
+.button:hover {
+    transform: translateY(-5px);
+}
+
+.button:active {
+    box-shadow: none;
+    transform: rotate(5deg)
+}
+
+.button:disabled {
+    transform: translateY(0px);
+    background: rgba(0,0,0,0.75);
+}
+
+.logo {
+    max-width: 60px;
+    padding-left: 5%;
+}
+
+.header {
+    display: flex;
+    margin: 1.5vh 1.5vw;
+    padding-bottom: 5%;
+}
