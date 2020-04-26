@@ -23,9 +23,6 @@ class Question extends PureComponent {
 
   render() {
     const { arabicQuestion, correctAnswer, englishTlit } = this.props;
-    // console.log(this.state.displayTlit);
-    // console.log(englishTlit);
-    // console.log(displayFeedback);
 
     if (correctAnswer === null) return <h1>Loading</h1>;
 
