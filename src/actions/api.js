@@ -64,9 +64,9 @@ export const setQuestionList = qList => ({
   payload: qList
 });
 
-export const gameStarted = breedList => ({
+export const gameStarted = questionList => ({
   type: GAME_STARTED,
-  payload: breedList
+  payload: questionList
 });
 
 export const nextQuestionCreated = question => ({
