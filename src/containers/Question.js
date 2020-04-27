@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import '../css/Question.css';
 import { connect } from 'react-redux'
-import { nextQuestion } from '../actions/api'
+import { nextQuestion, playAudio } from '../actions/api'
 import { faInfo } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, Modal } from "react-bootstrap";
@@ -42,27 +42,6 @@ class Question extends PureComponent {
       }
     };
 
-    // const renderGrammar = () => {
-    //   if (this.state.displayInfo) {
-    //     return (
-    //       <Modal.Dialog>
-    //         <Modal.Header closeButton>
-    //           <Modal.Title>Modal title</Modal.Title>
-    //         </Modal.Header>
-
-    //         <Modal.Body>
-    //           <p>Modal body text goes here.</p>
-    //         </Modal.Body>
-
-    //         <Modal.Footer>
-    //           <Button variant="secondary">Close</Button>
-    //           <Button variant="primary">Save changes</Button>
-    //         </Modal.Footer>
-    //       </Modal.Dialog>
-    //     );
-    //   }
-    // };
-
     const renderGrammar = () => {
       if (this.state.displayInfo) {
         return (
@@ -71,6 +50,7 @@ class Question extends PureComponent {
             centered
             show={this.state.displayInfo}
             onHide={this.displayInfo}
+            className="tlit"
           >
             <Modal.Header closeButton>
               <Modal.Title> {qObj.question} </Modal.Title>
@@ -110,6 +90,18 @@ class Question extends PureComponent {
             <p className="question" onClick={this.handleClick}>
               {qObj.question}
             </p>
+            <Button
+              style={{
+                backgroundColor: "#c9c9c9",
+                borderColor: "#c9c9c9",
+                color: "#303030",
+                borderRadius: "10px",
+              }}
+              className="infoButton"
+              onClick={this.props.playAudio}
+            >
+              <FontAwesomeIcon icon={faInfo} />
+            </Button>
           </div>
         );
       }
@@ -132,4 +124,4 @@ const mapStateToProps = state => {
     };
 }
 
-export default connect(mapStateToProps, { nextQuestion })(Question)
+export default connect(mapStateToProps, { nextQuestion, playAudio })(Question);

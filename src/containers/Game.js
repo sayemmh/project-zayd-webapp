@@ -45,7 +45,7 @@ class Game extends PureComponent {
     const continueButton = () => {
       if (feedback) {
         return (
-          <Button variant="dark" onClick={this.continue}>
+          <Button variant="dark" className="tlit" onClick={this.continue}>
             {"Continue"}
           </Button>
         );

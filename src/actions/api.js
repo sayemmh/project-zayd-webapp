@@ -60,6 +60,12 @@ export const levelTwo = () => {
   };
 };
 
+export const playAudio = () => {
+  return async () => {
+    await axios.get(`https://verses.quran.com/wbw/039_001_002.mp3`);
+  };
+};
+
 export const setQuestionList = qList => ({
   type: SET_QUESTIONLIST,
   payload: qList
