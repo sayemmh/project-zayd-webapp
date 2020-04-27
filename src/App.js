@@ -5,6 +5,7 @@ import store from './store'
 import Game from './containers/Game'
 import "bootstrap/dist/css/bootstrap.min.css";
 import TopNavBar from "./components/TopNavBar";
+import Footer from "./components/Footer";
 
 class App extends Component {
 
@@ -16,6 +17,7 @@ class App extends Component {
           <div className="game">
             <Game />
           </div>
+          <Footer />
         </div>
       </Provider>
     );
