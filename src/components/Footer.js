@@ -17,7 +17,7 @@ class Footer extends React.Component {
       <Navbar className="navbar" bg="light" variant="light">
         <Nav className="mr-auto"></Nav>
         <Nav>
-          <Nav.Link href="#features">Contact Us</Nav.Link>
+          <Nav.Link href="#features">About</Nav.Link>
         </Nav>
       </Navbar>
     );
