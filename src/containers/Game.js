@@ -5,7 +5,7 @@ import Question from "./Question";
 import AnswerButton from "./AnswerButton";
 import Feedback from "../components/Feedback";
 import { moveOnFromFeedback } from "../actions/feedback";
-import { Button } from "react-bootstrap";
+import { ProgressBar, Button } from "react-bootstrap";
 import '../css/Question.css';
 
 class Game extends PureComponent {
@@ -17,20 +17,17 @@ class Game extends PureComponent {
     this.setState({ loaded: true });
   }
 
-  checkAnswer2 = () => {
+  continue = () => {
     this.props.moveOnFromFeedback();
   };
 
   render() {
-    // console.log(this.state.loaded)
     const { questions_to_ask, correctAnswer, options, feedback } = this.props;
     if (questions_to_ask.length === 0 || options === null)
       return <div className="prompt">Select A Level</div>;
 
     const renderQuestion = () => {
-      if (!feedback) {
-        return <Question />;
-      }
+      return <Question />;
     };
 
     const renderAnswers = () => {
@@ -48,7 +45,7 @@ class Game extends PureComponent {
     const continueButton = () => {
       if (feedback) {
         return (
-          <Button variant="dark" onClick={this.checkAnswer2}>
+          <Button variant="dark" onClick={this.continue}>
             {"Continue"}
           </Button>
         );
@@ -61,6 +58,9 @@ class Game extends PureComponent {
         {renderAnswers()}
         <Feedback />
         {continueButton()}
+        <div className="progressBar">
+          <ProgressBar variant="success" now={40} />
+        </div>
       </>
     );
   }
@@ -70,7 +70,7 @@ const mapStateToProps = state => {
   return {
     questions_to_ask: state.questions_to_ask,
     options: state.question.currentAnswers,
-    correctAnswer: state.question.correctAnswer,
+    correctAnswer: state.question.qObj.answer,
     feedback: state.feedback.displayFeedback
   };
 };

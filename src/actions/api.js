@@ -15,10 +15,11 @@ export const startGame = () => {
     let qlist;
     let questionList;
     await axios
-      .get(`api/questions/levels/2`)
+      .get(`api/questions/levels/1`)
       .then(res => {
           qlist = res.data;
           questionList = createQuestionsList(qlist);
+
           dispatch(setQuestionList(qlist));
           dispatch(gameStarted(questionList));
       })
@@ -36,14 +37,13 @@ export const levelOne = () => {
         qlist = res.data;
         questionList = createQuestionsList(qlist);
         dispatch(setQuestionList(qlist));
-        dispatch(gameStarted(questionList));
+        // dispatch(gameStarted(questionList));
       })
       .catch((err) => console.log(err));
   };
 };
 
 export const levelTwo = () => {
-  console.log("we here");
   return async (dispatch) => {
     let qlist;
     let questionList;
@@ -52,8 +52,9 @@ export const levelTwo = () => {
       .then((res) => {
         qlist = res.data;
         questionList = createQuestionsList(qlist);
+
         dispatch(setQuestionList(qlist));
-        dispatch(gameStarted(questionList));
+        // dispatch(gameStarted(questionList));
       })
       .catch((err) => console.log(err));
   };
@@ -74,38 +75,30 @@ export const nextQuestionCreated = question => ({
   payload: question
 });
 
-export const nextQuestion = delay => {
+export const nextQuestion = (delay) => {
   return async (dispatch, getState) => {
     const state = getState();
-
     if (state.buttons.active) {
       dispatch(disableButtons());
     }
 
-    // const { currentAnswers, correctAnswer } = createNextQuestion(
-    //   state.question.currentAnswers
-    // );
-
     const {
       currentAnswers,
-      correctAnswer,
-      arabicQuestion,
-      englishTlit
+      qObj
     } = createNextQuestionFR(state.questions_to_ask);
-
 
     if (delay) {
       await sleep(delay);
     }
 
+    // check NEXT_QUESTION in question reducer
     dispatch(
       nextQuestionCreated({
         currentAnswers,
-        correctAnswer,
-        arabicQuestion,
-        englishTlit,
+        qObj
       })
     );
+
     dispatch(activateButtons());
   };
 };

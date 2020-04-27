@@ -7,6 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import TopNavBar from "./components/TopNavBar";
 
 class App extends Component {
+
   render() {
     return (
       <Provider store={store}>
