@@ -5,7 +5,7 @@ import { disableButtons } from './buttons'
 export const SHOW_FEEDBACK = 'SHOW_FEEDBACK'
 export const HIDE_FEEDBACK = 'HIDE_FEEDBACK'
 
-const PAUSE_BEFORE_SHOWING_FEEDBACK = 1000
+const PAUSE_BEFORE_SHOWING_FEEDBACK = 500
 
 export const showFeedback = () => ({
     type: SHOW_FEEDBACK
