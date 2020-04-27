@@ -15,8 +15,8 @@ class TopNavBar extends React.Component {
 
   render() {
     return (
-      <Navbar bg="dark" variant="dark">
-        <Navbar.Brand href="#home">quranlingo</Navbar.Brand>
+      <Navbar className="navbar" bg="dark" variant="dark">
+        <Nav className="navbar">quranlingo</Nav>
         <Nav className="mr-auto"></Nav>
         <Nav>
           <Nav.Link href="#features">About</Nav.Link>

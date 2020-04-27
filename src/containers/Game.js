@@ -6,13 +6,14 @@ import AnswerButton from "./AnswerButton";
 import Feedback from "../components/Feedback";
 import { moveOnFromFeedback } from "../actions/feedback";
 import { Button } from "react-bootstrap";
+import '../css/Question.css';
 
 class Game extends PureComponent {
   state = {
     loaded: false,
   };
   componentDidMount() {
-    // this.props.startGame();
+    this.props.startGame();
     this.setState({ loaded: true });
   }
 
@@ -24,7 +25,7 @@ class Game extends PureComponent {
     // console.log(this.state.loaded)
     const { questions_to_ask, correctAnswer, options, feedback } = this.props;
     if (questions_to_ask.length === 0 || options === null)
-      return <h1>Select A Level</h1>;
+      return <div className="prompt">Select A Level</div>;
 
     const renderQuestion = () => {
       if (!feedback) {

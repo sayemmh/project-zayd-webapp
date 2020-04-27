@@ -1,8 +1,6 @@
 import React from "react";
 import "../css/button.css";
 import qlogo from "../logos/quran.png";
-import Dropdown from "react-bootstrap/Dropdown";
-import SplitButton from "react-bootstrap/SplitButton";
 
 const Header = () => {
 

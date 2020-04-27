@@ -28,16 +28,16 @@ class Question extends PureComponent {
 
     const renderTlit = () => {
       if (this.state.displayTlit) {
-        return <div className="tlit">{englishTlit}</div>;
+        return <p className="tlit">{englishTlit}</p>;
       }
     };
 
     const renderQuestionButton = () => {
         if (!this.state.displayFeedback) {
           return (
-            <div className="question" onClick={this.handleClick}>
+            <p className="question" onClick={this.handleClick}>
               {arabicQuestion}
-            </div>
+            </p>
           );
         }
     }

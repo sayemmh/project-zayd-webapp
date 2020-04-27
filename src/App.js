@@ -4,7 +4,6 @@ import './css/App.css';
 import store from './store'
 import Game from './containers/Game'
 import "bootstrap/dist/css/bootstrap.min.css";
-import Header from './components/Header';
 import TopNavBar from "./components/TopNavBar";
 
 class App extends Component {
