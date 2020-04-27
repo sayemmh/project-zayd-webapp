@@ -15,18 +15,15 @@ export const sleep = (duration) => new Promise((resolve) => {
     }, duration)
 })
   
-export const createSelection = (breedList, choiceCount) => {
-    // console.log("hey")
-    // console.log(breedList)
-    const currentAnswers = shuffle(sampleSize(breedList, choiceCount))
+export const createSelection = (qList, choiceCount) => {
+    const currentAnswers = shuffle(sampleSize(qList, choiceCount))
     return { 
         currentAnswers, 
     }
 }
 
-export const createAnswerChoicesSelection = (breedList, choiceCount) => {
-    const currentAnswers = shuffle(sampleSize(breedList, choiceCount))
-    // console.log(currentAnswers)
+export const createAnswerChoicesSelection = (qList, choiceCount) => {
+    const currentAnswers = shuffle(sampleSize(qList, choiceCount))
     return {
         currentAnswers,
     }
