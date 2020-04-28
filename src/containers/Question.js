@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import '../css/Question.css';
 import { connect } from 'react-redux'
 import { nextQuestion, playAudio } from '../actions/api'
-import { faInfo } from "@fortawesome/free-solid-svg-icons";
+import { faInfo, faPlay } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, Modal } from "react-bootstrap";
 
@@ -19,7 +19,6 @@ class Question extends PureComponent {
   }
 
   handleClick() {
-    console.log(this.state.displayTlit);
     this.setState((state) => ({
       displayTlit: !state.displayTlit,
     }));
@@ -29,6 +28,15 @@ class Question extends PureComponent {
     this.setState((state) => ({
       displayInfo: !state.displayInfo,
     }));
+  }
+
+  append0s(input) {
+    input = input.toString()
+    if (input.length === 1) {
+      return '00' + input
+    } else if (input.length === 2) {
+      return '0' + input
+    }
   }
 
   render() {
@@ -42,7 +50,17 @@ class Question extends PureComponent {
       }
     };
 
-    const renderGrammar = () => {
+    // remove this nonsense
+    // include this in data so i don't calculate this here
+    const surahayahword =
+      this.append0s(qObj.surahnum) +
+      "_" +
+      this.append0s(qObj.ayahnum) +
+      "_" +
+      this.append0s(qObj.wordnum);
+    console.log(surahayahword)
+
+    const renderWordInfo = () => {
       if (this.state.displayInfo) {
         return (
           <Modal
@@ -61,11 +79,6 @@ class Question extends PureComponent {
               Word frequency in Quran: {qObj.frequency} <br />
               Example: {qObj.arabicAyah} <br />
             </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={this.displayInfo}>
-                Close
-              </Button>
-            </Modal.Footer>
           </Modal>
         );
       }
@@ -82,14 +95,11 @@ class Question extends PureComponent {
                 color: "#303030",
                 borderRadius: "10px",
               }}
-              className="infoButton"
-              onClick={this.displayInfo}
+              className="soundButton"
+              onClick={() => this.props.playAudio(surahayahword)}
             >
-              <FontAwesomeIcon icon={faInfo} />
+              <FontAwesomeIcon icon={faPlay} />
             </Button>
-            <p className="question" onClick={this.handleClick}>
-              {qObj.question}
-            </p>
             <Button
               style={{
                 backgroundColor: "#c9c9c9",
@@ -98,10 +108,13 @@ class Question extends PureComponent {
                 borderRadius: "10px",
               }}
               className="infoButton"
-              onClick={this.props.playAudio}
+              onClick={this.displayInfo}
             >
               <FontAwesomeIcon icon={faInfo} />
             </Button>
+            <p className="question" onClick={this.handleClick}>
+              {qObj.question}
+            </p>
           </div>
         );
       }
@@ -112,7 +125,7 @@ class Question extends PureComponent {
         <br></br>
         {renderQuestionButton()}
         {renderTlit()}
-        {renderGrammar()}
+        {renderWordInfo()}
       </>
     );
   }

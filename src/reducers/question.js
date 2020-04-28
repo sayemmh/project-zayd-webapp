@@ -4,7 +4,8 @@ import { createSelection } from '../lib/utils'
 const initialState = {
   currentAnswers: null,
   choiceCount: 5,
-  qObj: {answer: ""}
+  // there has to be a better way to handle this
+  qObj: {answer: "", surahnum:"", ayahnum:"", wordnum:""}
 };
 
 export default (state = initialState, action = {}) => {

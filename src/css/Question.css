@@ -15,7 +15,16 @@
 
 .infoButton {
     position: relative;
-    top: 20px; left: 160px;;
+    /* top: 20px; left: 110px; */
+    top: 20px; left: 22%;
+    min-width: 40px;
+}
+
+.soundButton {
+    position: relative;
+    /* top: 20px; left: 100px; */
+    top: 20px; left: 20%;
+    min-width: 40px;
 }
 
 .progressBar {

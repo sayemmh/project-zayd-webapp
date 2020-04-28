@@ -10,6 +10,7 @@
     "bcryptjs": "^2.4.3",
     "bootstrap": "^4.4.1",
     "concurrently": "^5.2.0",
+    "cors": "^2.8.5",
     "jquery": "^3.5.0",
     "mongoose": "^5.9.10",
     "passport": "^0.4.1",

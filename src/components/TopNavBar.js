@@ -19,7 +19,7 @@ class TopNavBar extends React.Component {
         <Nav className="navbar">quranlingo</Nav>
         <Nav className="mr-auto"></Nav>
         <Nav>
-          <NavDropdown title="Select Level" id="collasible-nav-dropdown">
+          <NavDropdown title="Level" id="collasible-nav-dropdown">
             <NavDropdown.Item onClick={this.changeLevel1}>1</NavDropdown.Item>
             <NavDropdown.Item onClick={this.changeLevel2}>2</NavDropdown.Item>
             <NavDropdown.Item>3</NavDropdown.Item>

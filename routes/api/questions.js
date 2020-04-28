@@ -1,7 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const mongoose = require("mongoose");
-const passport = require("passport");
 
 // Question model
 const Question = require("../../models/Question");
@@ -18,7 +16,6 @@ router.get("/test", (req, res) => {
 // @desc    Get question by question_id
 // @access  Public
 router.get("/:id", (req, res) => {
-  // console.log(req.params.id);
   Question.findOne({ question_id: req.params.id })
     .then((post) => {
       if (post) {
@@ -39,10 +36,6 @@ router.get("/levels/:id", (req, res) => {
   Level.findOne({ level: req.params.id })
     .then((level) => {
       let question_ids = level.question_ids;
-      // question_ids = [
-      //     918228083487,
-      //     960855380831
-      // ]
       Question.find({
         question_id: {
           $in: question_ids,

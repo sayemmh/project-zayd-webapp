@@ -60,9 +60,15 @@ export const levelTwo = () => {
   };
 };
 
-export const playAudio = () => {
+export const playAudio = (surah) => {
   return async () => {
-    await axios.get(`https://verses.quran.com/wbw/039_001_002.mp3`);
+    await axios
+      .get(`https://project-zayd-2000.s3.amazonaws.com/` + surah + ".mp3")
+      .then((res) => {
+        let aud = new Audio(res.config.url);
+        aud.play();
+        console.log(surah);
+      });
   };
 };
 
