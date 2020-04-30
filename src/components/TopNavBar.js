@@ -1,7 +1,7 @@
 import React from "react";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import "../css/button.css";
-import { levelSelect } from "../actions/api";
+import { nextQuestion, levelSelect } from "../actions/api";
 import { connect } from "react-redux";
 
 class TopNavBar extends React.Component {
@@ -12,6 +12,8 @@ class TopNavBar extends React.Component {
   changeLevel = (level) => {
     this.props.levelSelect(level);
     this.setState({ curLevel: level });
+    // need to fix this -- this is grabbing another question from the same level, async this function
+    this.props.nextQuestion();
   };
 
   render() {
@@ -25,7 +27,7 @@ class TopNavBar extends React.Component {
               title={`Level ${this.state.curLevel}`}
               id="collasible-nav-dropdown"
             >
-              {[...Array(25).keys()].map((level) => (
+              {[...Array(100).keys()].map((level) => (
                 <NavDropdown.Item
                   key={`key-${level}`}
                   onClick={() => this.changeLevel(level)}
@@ -50,6 +52,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { levelSelect })(
-  TopNavBar
-);
+export default connect(mapStateToProps, { nextQuestion, levelSelect })(TopNavBar);

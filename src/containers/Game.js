@@ -12,6 +12,7 @@ class Game extends PureComponent {
   state = {
     loaded: false,
   };
+
   componentDidMount() {
     this.props.startGame();
     this.setState({ loaded: true });
@@ -22,7 +23,7 @@ class Game extends PureComponent {
   };
 
   render() {
-    const { questions_to_ask, correctAnswer, options, feedback } = this.props;
+    const { question, questions_to_ask, correctAnswer, options, feedback, points } = this.props;
     if (questions_to_ask.length === 0 || options === null)
       return <div className="prompt">Select A Level</div>;
 
@@ -36,10 +37,15 @@ class Game extends PureComponent {
           <AnswerButton
             key={`${option}-${Math.random()}`}
             option={option}
+            question={question}
             correctAnswer={correctAnswer}
           />
         ));
       }
+    };
+
+    const renderPoints = () => {
+      return <div className="points"> Points: {points} </div>;
     };
 
     const continueButton = () => {
@@ -58,9 +64,7 @@ class Game extends PureComponent {
         {renderAnswers()}
         <Feedback />
         {continueButton()}
-        <div className="progressBar">
-          <ProgressBar variant="success" now={40} />
-        </div>
+        {renderPoints()}
       </>
     );
   }
@@ -69,9 +73,11 @@ class Game extends PureComponent {
 const mapStateToProps = state => {
   return {
     questions_to_ask: state.questions_to_ask,
+    question: state.question.qObj.question,
     options: state.question.currentAnswers,
     correctAnswer: state.question.qObj.answer,
-    feedback: state.feedback.displayFeedback
+    feedback: state.feedback.displayFeedback,
+    points: state.feedback.gamePoints
   };
 };
 

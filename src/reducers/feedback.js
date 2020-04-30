@@ -1,7 +1,8 @@
-import { HIDE_FEEDBACK, SHOW_FEEDBACK } from "../actions/feedback";
+import { SET_POINTS, HIDE_FEEDBACK, SHOW_FEEDBACK } from "../actions/feedback";
 
 const initialState = {
-    displayFeedback: false
+    displayFeedback: false,
+    gamePoints: 0
 }
 
 export default (state = initialState, action = {}) => {
@@ -12,6 +13,11 @@ export default (state = initialState, action = {}) => {
 
         case SHOW_FEEDBACK: {
             return { ...state, displayFeedback: true }
+        }
+
+        case SET_POINTS : {
+            // console.log(state)
+            return { ...state, gamePoints: action.payload };
         }
     
         default: { 

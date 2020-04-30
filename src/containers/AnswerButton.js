@@ -1,23 +1,28 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { nextQuestion } from '../actions/api'
+import { nextQuestion } from "../actions/api";
 import { showFeedbackScreen } from "../actions/feedback";
 import '../css/button.css'
 
 const GREEN = "#18a100"
 const RED = "#910303"
-const BLACK = 'white'
-const ONE_SECOND_DELAY = 2000
+const SHORT_DELAY = 250
+const WHITE = "white";
 
 class AnswerButton extends React.Component {
     state = {
-        textColor: BLACK
+        textColor: WHITE
     }
 
     checkAnswer = (event) => {
-        if(event.target.innerText === this.props.correctAnswer){
-            this.setState({ textColor: GREEN })
-            this.props.nextQuestion(ONE_SECOND_DELAY)
+        if (event.target.innerText === this.props.correctAnswer) {
+            
+            // need a way to actually remove tashkeel
+
+            // why does component state not set anymore
+            this.setState({ textColor: GREEN });
+            
+            this.props.nextQuestion(SHORT_DELAY, this.props.question.length);
         } else {
             this.setState({ textColor: RED })
             this.props.showFeedbackScreen();
@@ -41,11 +46,12 @@ class AnswerButton extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-    buttonsActive: state.buttons.active,
-    displayFeedback: state.feedback.displayFeedback
-})
+  buttonsActive: state.buttons.active,
+  displayFeedback: state.feedback.displayFeedback,
+});
 
-export default connect(mapStateToProps, { nextQuestion, showFeedbackScreen })(
-  AnswerButton
-);
+export default connect(mapStateToProps, { 
+  nextQuestion,
+  showFeedbackScreen,
+})(AnswerButton);
 

@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import '../css/Question.css';
 import { connect } from 'react-redux'
 import { nextQuestion, playAudio } from '../actions/api'
-import { faInfo, faPlay } from "@fortawesome/free-solid-svg-icons";
+import { faInfo, faVolumeUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, Modal } from "react-bootstrap";
 
@@ -24,19 +24,14 @@ class Question extends PureComponent {
     }));
   }
 
+  openQuranDotCom(surah, ayah) {
+    window.open(`https://quran.com/${surah}/${ayah}`, "_blank");
+  }
+
   displayInfo() {
     this.setState((state) => ({
       displayInfo: !state.displayInfo,
     }));
-  }
-
-  append0s(input) {
-    input = input.toString()
-    if (input.length === 1) {
-      return '00' + input
-    } else if (input.length === 2) {
-      return '0' + input
-    }
   }
 
   render() {
@@ -50,10 +45,7 @@ class Question extends PureComponent {
       }
     };
 
-    // remove this nonsense
-    // include this in data so i don't calculate this here
-    const surahayahword = qObj.surahayahnum
-
+    const surahayahword = qObj.surahayahnum;
 
     const renderWordInfo = () => {
       if (this.state.displayInfo) {
@@ -63,16 +55,35 @@ class Question extends PureComponent {
             centered
             show={this.state.displayInfo}
             onHide={this.displayInfo}
-            className="tlit"
+            className="info"
           >
             <Modal.Header closeButton>
               <Modal.Title> {qObj.question} </Modal.Title>
             </Modal.Header>
             <Modal.Body>
+              Context: {qObj.arabicAyah} - Quran ({qObj.surahnum}/{qObj.ayahnum}
+              )<a> </a>
+              <a
+                onClick={() =>
+                  this.openQuranDotCom(qObj.surahnum, qObj.ayahnum)
+                }
+                style={{
+                  color: "#2169db",
+                }}
+              >
+                Link
+              </a>
+              <br />
+              <br />
+              Wazn: {qObj.wazn} <br />
+              Part of speech: {qObj.waznType} <br />
+              Frequency of this wazn in the Quran: {qObj.waznFreq}
+              <br />
+              <br />
               Root word: {qObj.rootWord} <br />
               Root word type: {qObj.rootWordType} <br />
-              Word frequency in Quran: {qObj.frequency} <br />
-              Example: {qObj.arabicAyah} <br />
+              Frequency of this root word in the Quran: {qObj.frequency} <br />
+              <br />
             </Modal.Body>
           </Modal>
         );
@@ -93,7 +104,7 @@ class Question extends PureComponent {
               className="soundButton"
               onClick={() => this.props.playAudio(surahayahword)}
             >
-              <FontAwesomeIcon icon={faPlay} />
+              <FontAwesomeIcon icon={faVolumeUp} />
             </Button>
             <Button
               style={{

@@ -4,9 +4,23 @@
     font-family: 'Amiri', serif;
 }
 
+.info {
+    font-size: 22px;
+    font-family: 'Amiri', serif;
+}
+
 .tlit {
     font-family: 'Noto Sans JP', sans-serif;
     font-size: 26px;
+}
+
+.points {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 26px;
+    padding-top: 5%;
+    position: relative;
+    top: 50px;
+    left: 22%;
 }
 
 .prompt {
@@ -15,14 +29,12 @@
 
 .infoButton {
     position: relative;
-    /* top: 20px; left: 110px; */
     top: 20px; left: 22%;
     min-width: 40px;
 }
 
 .soundButton {
     position: relative;
-    /* top: 20px; left: 100px; */
     top: 20px; left: 20%;
     min-width: 40px;
 }

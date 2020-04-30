@@ -9,13 +9,14 @@ import axios from "axios";
 export const SET_QUESTIONLIST = "SET_QUESTIONLIST";
 export const GAME_STARTED = "GAME_STARTED";
 export const NEXT_QUESTION = "NEXT_QUESTION";
+export const SET_POINTS = "SET_POINTS";
 
 export const startGame = () => {
   return async dispatch => {
     let qlist;
     let questionList;
     await axios
-      .get(`api/questions/levels/91`)
+      .get(`api/questions/levels/1`)
       .then(res => {
           qlist = res.data;
           questionList = createQuestionsList(qlist);
@@ -24,41 +25,6 @@ export const startGame = () => {
           dispatch(gameStarted(questionList));
       })
       .catch(err => console.log(err));
-  };
-};
-
-export const levelOne = () => {
-  console.log("levelOne called");
-  return async (dispatch) => {
-    let qlist;
-    let questionList;
-    await axios
-      .get(`api/questions/levels/90`)
-      .then((res) => {
-        qlist = res.data;
-        questionList = createQuestionsList(qlist);
-        dispatch(setQuestionList(qlist));
-        // dispatch(gameStarted(questionList));
-      })
-      .catch((err) => console.log(err));
-  };
-};
-
-export const levelTwo = () => {
-  console.log("levelTwo called");
-  return async (dispatch) => {
-    let qlist;
-    let questionList;
-    await axios
-      .get(`api/questions/levels/92`)
-      .then((res) => {
-        qlist = res.data;
-        questionList = createQuestionsList(qlist);
-
-        dispatch(setQuestionList(qlist));
-        // dispatch(gameStarted(questionList));
-      })
-      .catch((err) => console.log(err));
   };
 };
 
@@ -109,7 +75,7 @@ export const nextQuestionCreated = question => ({
   payload: question
 });
 
-export const nextQuestion = (delay) => {
+export const nextQuestion = (delay, points) => {
   return async (dispatch, getState) => {
     const state = getState();
     if (state.buttons.active) {
@@ -123,6 +89,8 @@ export const nextQuestion = (delay) => {
 
     if (delay) {
       await sleep(delay);
+      points = state.feedback.gamePoints + Math.round(points / 2) * 10;
+      dispatch(setPoints(points));
     }
 
     // check NEXT_QUESTION in question reducer
@@ -136,3 +104,8 @@ export const nextQuestion = (delay) => {
     dispatch(activateButtons());
   };
 };
+
+export const setPoints = (points) => ({
+  type: SET_POINTS,
+  payload: points,
+});
