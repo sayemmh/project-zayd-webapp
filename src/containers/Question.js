@@ -52,13 +52,8 @@ class Question extends PureComponent {
 
     // remove this nonsense
     // include this in data so i don't calculate this here
-    const surahayahword =
-      this.append0s(qObj.surahnum) +
-      "_" +
-      this.append0s(qObj.ayahnum) +
-      "_" +
-      this.append0s(qObj.wordnum);
-    console.log(surahayahword)
+    const surahayahword = qObj.surahayahnum
+
 
     const renderWordInfo = () => {
       if (this.state.displayInfo) {

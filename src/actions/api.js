@@ -15,7 +15,7 @@ export const startGame = () => {
     let qlist;
     let questionList;
     await axios
-      .get(`api/questions/levels/1`)
+      .get(`api/questions/levels/91`)
       .then(res => {
           qlist = res.data;
           questionList = createQuestionsList(qlist);
@@ -32,7 +32,7 @@ export const levelOne = () => {
     let qlist;
     let questionList;
     await axios
-      .get(`api/questions/levels/1`)
+      .get(`api/questions/levels/90`)
       .then((res) => {
         qlist = res.data;
         questionList = createQuestionsList(qlist);
@@ -48,7 +48,7 @@ export const levelTwo = () => {
     let qlist;
     let questionList;
     await axios
-      .get(`api/questions/levels/2`)
+      .get(`api/questions/levels/92`)
       .then((res) => {
         qlist = res.data;
         questionList = createQuestionsList(qlist);
