@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
+var _ = require("lodash");
+
 // Question model
 const Question = require("../../models/Question");
 const Level = require("../../models/Level");
@@ -36,6 +38,8 @@ router.get("/levels/:id", (req, res) => {
   Level.findOne({ level: req.params.id })
     .then((level) => {
       let question_ids = level.question_ids;
+      question_ids = _.sampleSize(question_ids, 100);
+      console.log(question_ids.length)
       Question.find({
         question_id: {
           $in: question_ids,

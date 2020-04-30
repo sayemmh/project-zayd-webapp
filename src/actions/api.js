@@ -28,6 +28,7 @@ export const startGame = () => {
 };
 
 export const levelOne = () => {
+  console.log("levelOne called");
   return async (dispatch) => {
     let qlist;
     let questionList;
@@ -44,6 +45,7 @@ export const levelOne = () => {
 };
 
 export const levelTwo = () => {
+  console.log("levelTwo called");
   return async (dispatch) => {
     let qlist;
     let questionList;
@@ -51,6 +53,26 @@ export const levelTwo = () => {
       .get(`api/questions/levels/92`)
       .then((res) => {
         qlist = res.data;
+        questionList = createQuestionsList(qlist);
+
+        dispatch(setQuestionList(qlist));
+        // dispatch(gameStarted(questionList));
+      })
+      .catch((err) => console.log(err));
+  };
+};
+
+export const levelSelect = (level) => {
+  console.log("levelSelect called");
+  return async (dispatch) => {
+    let qlist;
+    let questionList;
+    console.log(level);
+    await axios
+      .get(`api/questions/levels/` + level)
+      .then((res) => {
+        qlist = res.data;
+        
         questionList = createQuestionsList(qlist);
 
         dispatch(setQuestionList(qlist));

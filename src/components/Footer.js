@@ -4,13 +4,6 @@ import "../css/button.css";
 import { connect } from "react-redux";
 
 class Footer extends React.Component {
-  changeLevel1 = () => {
-    this.props.levelOne();
-  };
-
-  changeLevel2 = () => {
-    this.props.levelTwo();
-  };
 
   render() {
     return (
