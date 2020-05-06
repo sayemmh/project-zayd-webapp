@@ -17,10 +17,20 @@
 .points {
     font-family: 'Noto Sans JP', sans-serif;
     font-size: 26px;
-    padding-top: 5%;
+    padding-top: 2%;
     position: relative;
     top: 50px;
     left: 22%;
+}
+
+.correct {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 27px;
+    padding-top: 0%;
+    position: relative;
+    top: 50px;
+    left: 22%;
+    color: "#18a100"
 }
 
 .prompt {

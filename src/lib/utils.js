@@ -8,6 +8,14 @@ export const createQuestionsList = (qlist) => {
     return output
 };
 
+export const createAnswerList = (qobjs) => {
+    let ans = []
+    for (let i = 0; i < qobjs.length; i++) {
+        ans.push(qobjs[i].answer)
+    }
+    return ans
+};
+
 export const sleep = (duration) => new Promise((resolve) => {
     setTimeout(() => {
       resolve();

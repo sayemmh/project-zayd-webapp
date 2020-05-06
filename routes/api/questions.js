@@ -38,7 +38,6 @@ router.get("/levels/:id", (req, res) => {
   Level.findOne({ level: req.params.id })
     .then((level) => {
       let question_ids = level.question_ids;
-      question_ids = _.sampleSize(question_ids, 100);
       console.log(question_ids.length)
       Question.find({
         question_id: {

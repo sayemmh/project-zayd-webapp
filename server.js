@@ -4,14 +4,26 @@ const bodyParser = require("body-parser");
 const passport = require("passport");
 const path = require("path");
 
+var auth = require('./routes/api/auth');
+var authRouter = require('./routes/api/auth');
+
 const questions = require("./routes/api/questions");
 const levels = require("./routes/api/levels");
 const users = require("./routes/api/users");
+const surahs = require("./routes/api/surahs");
+
 var cors = require("cors");
 
 const app = express();
 
-cors
+// cors
+// var corsOption = {
+//   origin: true,
+//   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+//   credentials: true,
+//   exposedHeaders: ['x-auth-token']
+// };
+// app.use(cors(corsOption))
 app.use(cors());
 
 // Body parser middleware
@@ -19,7 +31,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 
-// // cors
+// cors
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "localhost:3000"); // update to match the domain you will make the request from
   res.header(
@@ -48,6 +60,9 @@ require("./config/passport")(passport);
 app.use("/api/questions", questions);
 app.use("/api/levels", levels);
 app.use("/api/users", users);
+// app.use("/api/surahs", surahs);
+// app.use('/api/v1/', auth);
+// app.use('/', authRouter);
 
 // Server static assets if in production
 if (process.env.NODE_ENV === "production") {

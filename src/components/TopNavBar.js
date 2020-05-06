@@ -1,17 +1,26 @@
 import React from "react";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import "../css/button.css";
-import { nextQuestion, levelSelect } from "../actions/api";
+import { nextQuestion, levelSelect, surahSelect } from "../actions/api";
 import { connect } from "react-redux";
+import { Dropdown } from "semantic-ui-react";
 
 class TopNavBar extends React.Component {
   state = {
-    curLevel: 1
+    curLevel: 1,
+    curSurah: ""
   }
-
+  
   changeLevel = (level) => {
     this.props.levelSelect(level);
-    this.setState({ curLevel: level });
+    this.setState({ curLevel: level, curSurah: "" });
+    // need to fix this -- this is grabbing another question from the same level, async this function
+    this.props.nextQuestion();
+  };
+
+  changeSurah = (surah) => {
+    this.props.surahSelect(surah);
+    this.setState({ curLevel: "", curSurah: surah });
     // need to fix this -- this is grabbing another question from the same level, async this function
     this.props.nextQuestion();
   };
@@ -36,6 +45,20 @@ class TopNavBar extends React.Component {
                 </NavDropdown.Item>
               ))}
             </NavDropdown>
+
+            <NavDropdown
+              title={`Surah ${this.state.curSurah}`}
+              id="collasible-nav-dropdown"
+            >
+              {[...Array(114).keys()].map((surah) => (
+                <NavDropdown.Item
+                  key={`surah-${surah}`}
+                  onClick={() => this.changeSurah(surah)}
+                >
+                  {surah}
+                </NavDropdown.Item>
+              ))}
+            </NavDropdown>
           </Nav>
         </Navbar>
       </>
@@ -52,4 +75,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { nextQuestion, levelSelect })(TopNavBar);
+export default connect(mapStateToProps, { nextQuestion, levelSelect, surahSelect })(TopNavBar);

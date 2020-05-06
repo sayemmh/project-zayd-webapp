@@ -7,6 +7,7 @@ import Feedback from "../components/Feedback";
 import { moveOnFromFeedback } from "../actions/feedback";
 import { ProgressBar, Button } from "react-bootstrap";
 import '../css/Question.css';
+// import Tada from 'react-reveal/Tada';
 
 class Game extends PureComponent {
   state = {
@@ -22,10 +23,27 @@ class Game extends PureComponent {
     this.props.moveOnFromFeedback();
   };
 
+  
   render() {
     const { question, questions_to_ask, correctAnswer, options, feedback, points } = this.props;
     if (questions_to_ask.length === 0 || options === null)
       return <div className="prompt">Select A Level</div>;
+
+    // const renderPoints2 = () => {
+    //   return (
+    //     <div>
+    //       <Tada>
+    //         <h1 className="correct">Correct!</h1>
+    //       </Tada>
+    //       <div className="points"> Points: {points} </div>
+    //     </div>
+    //   );
+      
+    // };
+
+    const renderPoints = () => {
+      return <div className="points"> Points: {points} </div>;
+    };
 
     const renderQuestion = () => {
       return <Question />;
@@ -42,10 +60,6 @@ class Game extends PureComponent {
           />
         ));
       }
-    };
-
-    const renderPoints = () => {
-      return <div className="points"> Points: {points} </div>;
     };
 
     const continueButton = () => {

@@ -2,6 +2,7 @@ import {
   createNextQuestionFR,
   sleep,
   createQuestionsList,
+  createAnswerList
 } from "../lib/utils";
 import { activateButtons, disableButtons } from "./buttons";
 import axios from "axios";
@@ -31,16 +32,38 @@ export const startGame = () => {
 export const levelSelect = (level) => {
   console.log("levelSelect called");
   return async (dispatch) => {
-    let qlist;
+    let qobjs;
     let questionList;
+    let answerList;
     console.log(level);
     await axios
       .get(`api/questions/levels/` + level)
       .then((res) => {
-        qlist = res.data;
+        qobjs = res.data;
         
-        questionList = createQuestionsList(qlist);
+        questionList = createQuestionsList(qobjs);
+        // answerList = createAnswerList(qobjs);
+        // console.log(questionList)
+        // console.log(qlist)
+        dispatch(setQuestionList(qobjs))
+        // dispatch(gameStarted(answerList));
+      })
+      .catch((err) => console.log(err));
+  };
+};
 
+export const surahSelect = (surah) => {
+  console.log("surahSelect called");
+  return async (dispatch) => {
+    let qlist;
+    let questionList;
+    await axios
+      .get(`api/surahs/` + surah)
+      .then((res) => {
+        qlist = res.data;
+
+        questionList = createQuestionsList(qlist);
+        console.log(questionList.length)
         dispatch(setQuestionList(qlist));
         // dispatch(gameStarted(questionList));
       })
